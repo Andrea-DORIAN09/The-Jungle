@@ -4,7 +4,7 @@ var Product = require('../models/Product.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
- res.render('new', {title: 'Add Product'});
+ res.render('newp', {title: 'Add Product'});
 });
 
 /*
