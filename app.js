@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var logger = require('morgan'); 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
@@ -9,14 +9,17 @@ var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var products = require('./routes/products');
-var newp=require('./routes/newp');
+var employee = require('./routes/employee');
+var newemp=require('./routes/newemp');
+var deleteemp=require('./routes/deleteemp');
+var buscaremp=require('./routes/buscaremp');
+var controller=require('./controllers/employeeController.js');
 
 var app = express();
 
 // Connect to database
-//mongoose.connect('mongodb://localhost/products');
-mongoose.connect('process.env.MONGODB_URI');
+mongoose.connect('mongodb://localhost/employee');
+//mongoose.connect('process.env.MONGODB_URI');
 
 var db = mongoose.connection;
 
@@ -39,11 +42,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-/*app.use('/', index);*/
+//Rutas para accesar
+app.use('/', routes);
 app.use('/users', users);
-app.use('/products', products);
-app.use('/products/newp', newp);
+app.use('/employee', employee);
+app.use('/employee/newemp', newemp);
+app.use('/employee/deleteemp', deleteemp);
+app.use('/employee/buscaremp', buscaremp);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
